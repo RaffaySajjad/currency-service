@@ -1,0 +1,4 @@
+export enum LAMBDA_EVENT_TYPE {
+  LATEST = 'LATEST',
+  CURRENCIES = 'CURRENCIES'
+}
