@@ -24,9 +24,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 export const handler = async (event: LambdaEvent, context: any) => {
-  const { type } = event;
+  console.log('Event received:', event);
+  const { pathParameters } = event;
 
-  switch (type) {
+  switch (pathParameters) {
     case LAMBDA_EVENT_TYPE.LATEST:
       return await fetchData(API.LATEST);
     case LAMBDA_EVENT_TYPE.CURRENCIES:
@@ -34,6 +35,7 @@ export const handler = async (event: LambdaEvent, context: any) => {
         base_currency: 'USD'
       });
     default:
-      throw new Error(`Invalid event type: ${type}`);
+      console.error(`Error processing event: ${JSON.stringify(event)}`);
+      throw new Error(`Invalid event type: ${pathParameters}`);
   }
 };
